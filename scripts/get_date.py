@@ -30,7 +30,7 @@ def get_current_turno():
         return start_time.strftime('%d-%m-%Y %H:%M:%S'),end_time.strftime('%d-%m-%Y %H:%M:%S')
     else:
         start_time = datetime.combine(now.date(), turno_3_start)
-        end_time = datetime.combine(now.date(), turno_3_end)
+        end_time = datetime.combine(now.date() + timedelta(days=1), turno_3_end) 
         return start_time.strftime('%d-%m-%Y %H:%M:%S'), end_time.strftime('%d-%m-%Y %H:%M:%S')
 
 
