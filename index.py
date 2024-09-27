@@ -23,15 +23,14 @@ def main():
     start_date = f'{start_time}'  # start time turn now
     end_date = f'{end_time}'  # end time turn  now 
     
-    print(start_date, end_date, table_name)
+    
 
     """ try:
         # call the función fetch_records_by_date
         records = fetch_records_by_date(DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD, table_name, start_date, end_date)
 
         
-        for record in records:
-            print(record)
+        print(records)
 
     except Exception as e:
         print(f"An error occurred: {e}") """

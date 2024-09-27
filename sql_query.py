@@ -13,10 +13,9 @@ def fetch_records_by_date(server: str, database: str, username: str, password: s
         start_date (str): The starting date and time (in 'dd-mm-yyyy HH:MM:SS' format) to filter the records.
         end_date (str): The ending date and time (in 'dd-mm-yyyy HH:MM:SS' format) to filter the records.
         order_by (str): The column by which to order the results, defaults to 'Created'.
-       
 
     Returns:
-        list: A list of tuples, where each tuple represents a row from the query result.
+        list: A list of lists, where each inner list represents a row from the query result.
 
     Raises:
         Exception: If there is an issue with the database connection or executing the query.
@@ -43,15 +42,18 @@ def fetch_records_by_date(server: str, database: str, username: str, password: s
         # Execute the query with the start and end dates as parameters
         cursor.execute(query, (start_date, end_date))
         
-        # Fetch all results
+        # Fetch all results and convert to a list of lists
         rows = cursor.fetchall()
+        result = [list(row) for row in rows]  
         
-        # Optionally: Close the cursor and connection after fetching the data
+       
         cursor.close()
         conn.close()
         
-        return rows
+        return result
     
     except Exception as e:
         # Raise an exception if there's an issue during the connection or query execution
         raise Exception(f"Error during database connection or query execution: {e}")
+
+
