@@ -23,7 +23,7 @@ def main():
     start_date = f'{start_time}'  # start time turn now
     end_date = f'{end_time}'  # end time turn  now 
     
-    
+    print (start_date, end_date)
 
     """ try:
         # call the función fetch_records_by_date
