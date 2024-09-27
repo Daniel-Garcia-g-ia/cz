@@ -25,15 +25,15 @@ def main():
     
     print (start_date, end_date)
 
-    """ try:
+    try:
         # call the función fetch_records_by_date
-        records = fetch_records_by_date(DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD, table_name, start_date, end_date)
+        records = fetch_records_by_date(DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD, table_name, start_date, end_date,'Created')
 
         
         print(records)
 
     except Exception as e:
-        print(f"An error occurred: {e}") """
+        print(f"An error occurred: {e}")
 
 
 if __name__ == '__main__':

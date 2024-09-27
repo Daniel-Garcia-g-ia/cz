@@ -1,6 +1,6 @@
 import pyodbc
 
-def fetch_records_by_date(server: str, database: str, username: str, password: str, table: str, start_date: str, end_date: str, order_by: str = 'Created'):
+def fetch_records_by_date(server: str, database: str, username: str, password: str, table: str, start_date: str, end_date: str, order_by: str):
     """
     Fetch records from a given SQL Server database table, filtered by date and time range.
 
