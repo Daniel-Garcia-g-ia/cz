@@ -2,7 +2,8 @@ import os
 from dotenv import load_dotenv  
 from sql_query import fetch_records_by_date  
 from scripts.get_date import get_current_turno as date
-from scripts.file import file_turn_report_excel as turn_report
+from scripts.file import *
+from scripts.create_dir import *
 
 # Cargar las variables de entorno desde el archivo .env
 load_dotenv()
@@ -14,6 +15,8 @@ DB_USER = os.getenv('DB_USER')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
 DB_TABLE = os.getenv('DB_TABLE')
 URL_REPORT = os.getenv('URL_REPORT')
+URL_REPORT = os.getenv('URL_REPORT')
+URL_YEAR_DIRECTORY = os.getenv('URL_YEAR_DIRECTORY')
 
 
 def main():
@@ -30,7 +33,12 @@ def main():
         # call the función fetch_records_by_date
         records = fetch_records_by_date(DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD, table_name, start_date, end_date,'Created')
 
-        turn_report(URL_REPORT, turn, records)
+        year_directory= create_dir_year(URL_YEAR_DIRECTORY)
+        month_directory = create_dir_month(URL_YEAR_DIRECTORY)
+        day_directory, status = create_dir_day(URL_YEAR_DIRECTORY)
+        
+        file_turn_report_excel(URL_REPORT,day_directory, turn, records)
+        file_day_summary(URL_REPORT,day_directory, records)
        
 
     except Exception as e:
