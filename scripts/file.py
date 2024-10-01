@@ -105,8 +105,7 @@ def file_day_summary(path: str, new_path: str, data: list):
         new_sheet.merge_cells('AJ11:AQ11')
         new_sheet.merge_cells('AR11:AY11')
         new_sheet.merge_cells('BC11:BJ11')
-        new_sheet.merge_cells('BL11:BS11')
-        
+        new_sheet.merge_cells('BL11:BS11')       
         
         print("Datos escritos en la hoja con éxito.")
         
