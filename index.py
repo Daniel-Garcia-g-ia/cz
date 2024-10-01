@@ -1,7 +1,8 @@
 import os
 from dotenv import load_dotenv  
-""" from sql_query import fetch_records_by_date   """
+from sql_query import fetch_records_by_date  
 from scripts.get_date import get_current_turno as date
+from scripts.file import file_turn_report_excel as turn_report
 
 # Cargar las variables de entorno desde el archivo .env
 load_dotenv()
@@ -12,25 +13,25 @@ DB_NAME = os.getenv('DB_NAME')
 DB_USER = os.getenv('DB_USER')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
 DB_TABLE = os.getenv('DB_TABLE')
+URL_REPORT = os.getenv('URL_REPORT')
 
 
 def main():
     # set date turn now
-    start_time, end_time = date() 
+    start_time, end_time, turn = date() 
     
     # Parameter for the query
     table_name = DB_TABLE  # table name
     start_date = f'{start_time}'  # start time turn now
     end_date = f'{end_time}'  # end time turn  now 
     
-    print (start_date, end_date)
 
     try:
         # call the función fetch_records_by_date
         records = fetch_records_by_date(DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD, table_name, start_date, end_date,'Created')
 
-        
-        print(records)
+        turn_report(URL_REPORT, turn, records)
+       
 
     except Exception as e:
         print(f"An error occurred: {e}")

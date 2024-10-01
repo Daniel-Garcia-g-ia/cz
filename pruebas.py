@@ -1,4 +1,12 @@
-from scripts.open_file import open_file_excel as excel
+import os
+from dotenv import load_dotenv 
+from scripts.file import *
+from scripts.get_date import get_current_turno as date
+from scripts.create_dir import *
+
+URL_REPORT = os.getenv('URL_REPORT')
+URL_YEAR_DIRECTORY = os.getenv('URL_YEAR_DIRECTORY')
+
 
 
 data=[["24/9/2013 05:42",1,2,1,1,12,1,18,12,50,140,33,0,0,0,0,0],
@@ -21,6 +29,26 @@ data=[["24/9/2013 05:42",1,2,1,1,12,1,18,12,50,140,33,0,0,0,0,0],
       ['24/9/2013 05:49',1,2,17,1,10,1,18,10,50,80,35,0,0,0,0,0]
       ]
 
-excel('/mnt/c/Users/danie/Documents/pruebas_cz/Summary_inspection_line_Trad_Repor_modified.xlsx', data)
+#turn report
+
+year_directory= create_dir_year(URL_YEAR_DIRECTORY)
+month_directory = create_dir_month(URL_YEAR_DIRECTORY)
+day_directory, status = create_dir_day(URL_YEAR_DIRECTORY)
+start_time, end_time, turn = date()
+file_turn_report_excel(URL_REPORT,day_directory, turn, data)
+
+file_day_summary(URL_REPORT,day_directory, data)
+
+# summary report day
+
+
+
+
+
+
+
+
+
+
 
 

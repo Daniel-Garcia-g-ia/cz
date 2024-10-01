@@ -1,4 +1,4 @@
-import pyodbc
+""" import pyodbc
  
 # Detalles de la conexión
 server = 'SRV-SQL.trad.cz,49990'
@@ -34,4 +34,14 @@ try:
     conn.close()
  
 except Exception as e:
-    print(f"Error either Database Connection or executing query : {e}")
+    print(f"Error either Database Connection or executing query : {e}") """
+    
+from datetime import datetime
+
+
+today = datetime.now()
+
+month = today.strftime('%m')
+day = today.strftime('%d')
+
+print(month+day)
