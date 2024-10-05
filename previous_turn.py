@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv  
 from sql_query import fetch_records_by_date  
-from scripts.get_date import get_current_turno as date
+from scripts.get_date import get_current_turno_prev as date
 from scripts.file import *
 from scripts.create_dir import *
 
@@ -38,7 +38,7 @@ def main():
         day_directory, status = create_dir_day(URL_YEAR_DIRECTORY)
         
         file_turn_report_excel(URL_REPORT,day_directory, turn, records)
-        file_day_summary(URL_REPORT,day_directory, records)
+        
        
 
     except Exception as e:

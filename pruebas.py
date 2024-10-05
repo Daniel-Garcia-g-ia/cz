@@ -1,11 +1,14 @@
 import os
 from dotenv import load_dotenv 
 from scripts.file import *
-from scripts.get_date import get_current_turno as date
+from scripts.get_date import *
 from scripts.create_dir import *
 
+load_dotenv()
+
 URL_REPORT = os.getenv('URL_REPORT')
-URL_YEAR_DIRECTORY = os.getenv('URL_YEAR_DIRECTORY')
+URL_SUMMARY_DIRECTORY = os.getenv('URL_SUMMARY_DIRECTORY')
+NAME_FILE_REPORT = os.getenv('NAME_FILE_REPORT')
 
 
 
@@ -29,17 +32,53 @@ data=[["24/9/2013 05:42",1,2,1,1,12,1,18,12,50,140,33,0,0,0,0,0],
       ['24/9/2013 05:49',1,2,17,1,10,1,18,10,50,80,35,0,0,0,0,0]
       ]
 
-#turn report
 
-year_directory= create_dir_year(URL_YEAR_DIRECTORY)
-month_directory = create_dir_month(URL_YEAR_DIRECTORY)
-day_directory, status = create_dir_day(URL_YEAR_DIRECTORY)
-start_time, end_time, turn = date()
-file_turn_report_excel(URL_REPORT,day_directory, turn, data)
+""" #summary yesteday
 
-file_day_summary(URL_REPORT,day_directory, data)
 
-# summary report day
+path_summary_day_report, path_summary_report, day, month_text, path_created, file_exists = create_dir_yesterday(URL_SUMMARY_DIRECTORY,NAME_FILE_REPORT)
+
+
+try:
+      if file_exists:
+            name_file= f'{NAME_FILE_REPORT}_{month_text}.xlsx'
+            path_update_file= f'{path_summary_report}/{name_file}'            
+            file_day_summary(path_update_file, path_summary_report, data, day, month_text)
+            print('update file succefull')
+      else:
+            file_day_summary(URL_REPORT, path_summary_report, data, day, month_text)
+            print('created file succefull')
+            
+except NameError:
+      print('created does not existed') """
+
+
+# summary turn
+""" 
+start_time, end_time, turn = get_current_turno_prev()
+
+path_turn_report_day, day, created = create_dir_day(URL_SUMMARY_DIRECTORY, turn)
+
+file_turn_report_excel(URL_REPORT,path_turn_report_day, turn, day, data) """
+
+
+
+# summary day now
+path_summary_day_report, path_summary_report, day, month_text, path_created, file_exists = create_dir_day_now(URL_SUMMARY_DIRECTORY,NAME_FILE_REPORT)
+
+
+try:
+      if file_exists:
+            name_file= f'{NAME_FILE_REPORT}_{month_text}.xlsx'
+            path_update_file= f'{path_summary_report}/{name_file}'            
+            file_day_summary(path_update_file, path_summary_report, data, day, month_text)
+            print('update file succefull')
+      else:
+            file_day_summary(URL_REPORT, path_summary_report, data, day, month_text)
+            print('created file succefull')
+            
+except NameError:
+      print('created does not existed')
 
 
 

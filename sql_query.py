@@ -34,10 +34,10 @@ def fetch_records_by_date(server: str, database: str, username: str, password: s
         
         # SQL query to fetch records filtered by a date and time range, ordered by a specific column
         query = f"""
-        SELECT Created, LineName, ProductNumber, Lote, Chamber, OilPValue, OilLowerLimit, OilUpperLimit, OilFinalValue, OilEndTreshold, DifferentialPressureTime, HighPressureEncapsulationTime, EndValue, WaterFinalValue, WaterEndTreshold, OKNg, OldLote
+        SELECT Created, LineName, ProductNumber, Lote, Chamber, OilPValue, OilLowerLimit, OilUpperLimit, OilFinalValue, OilEndTreshold, DiferentialPresureTime, HighPressureEncapsulationTime, EndValue, WaterFinalValue, WaterEndTreshold, OKNg, OldLote
         FROM {table} 
         WHERE {order_by} BETWEEN ? AND ? 
-        ORDER BY {order_by} DESC
+        ORDER BY {order_by}
         """
         
         # Execute the query with the start and end dates as parameters
