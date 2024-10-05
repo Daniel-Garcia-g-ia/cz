@@ -1,5 +1,5 @@
 import os
-from dotenv import load_dotenv 
+from dotenv import load_dotenv
 from scripts.file import *
 from scripts.get_date import *
 from scripts.create_dir import *
@@ -33,7 +33,7 @@ data=[["24/9/2013 05:42",1,2,1,1,12,1,18,12,50,140,33,0,0,0,0,0],
       ]
 
 
-""" #summary yesteday
+#summary yesteday
 
 
 path_summary_day_report, path_summary_report, day, month_text, path_created, file_exists = create_dir_yesterday(URL_SUMMARY_DIRECTORY,NAME_FILE_REPORT)
@@ -50,7 +50,7 @@ try:
             print('created file succefull')
             
 except NameError:
-      print('created does not existed') """
+      print('created does not existed')
 
 
 # summary turn
