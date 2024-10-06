@@ -35,7 +35,7 @@ data=[["24/9/2013 05:42",1,2,1,1,12,1,18,12,50,140,33,0,0,0,0,0],
 
 #summary yesteday
 
-
+""" 
 path_summary_day_report, path_summary_report, day, month_text, path_created, file_exists = create_dir_yesterday(URL_SUMMARY_DIRECTORY,NAME_FILE_REPORT)
 
 
@@ -50,21 +50,21 @@ try:
             print('created file succefull')
             
 except NameError:
-      print('created does not existed')
+      print('created does not existed') """
 
 
 # summary turn
 
-start_time, end_time, turn = get_current_turno_prev()
+""" start_time, end_time, turn = get_current_turno_prev()
 
 path_turn_report_day, day, created = create_dir_day(URL_SUMMARY_DIRECTORY, turn)
 
-file_turn_report_excel(URL_REPORT,path_turn_report_day, turn, day, data)
+file_turn_report_excel(URL_REPORT,path_turn_report_day, turn, day, data) """
 
 
 
 # summary day now
-path_summary_day_report, path_summary_report, day, month_text, path_created, file_exists = create_dir_day_now(URL_SUMMARY_DIRECTORY,NAME_FILE_REPORT)
+""" path_summary_day_report, path_summary_report, day, month_text, path_created, file_exists = create_dir_day_now(URL_SUMMARY_DIRECTORY,NAME_FILE_REPORT)
 
 
 try:
@@ -78,7 +78,7 @@ try:
             print('created file succefull')
             
 except NameError:
-      print('created does not existed')
+      print('created does not existed') """
 
 
 

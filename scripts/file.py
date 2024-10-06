@@ -45,7 +45,7 @@ def file_turn_report_excel(path:str, new_path:str, turn:str, day:str, data: str 
     # define rute
     
     path_file = path
-    name_new_sheet = f"{day}_Turn_{turn}"   
+    name_new_sheet = f"{day}_Shift_{turn}"   
     
     
     try:
@@ -84,7 +84,7 @@ def file_turn_report_excel(path:str, new_path:str, turn:str, day:str, data: str 
         print("Datos escritos en la hoja con éxito.")
        
         
-        book.save(f'{new_path}/Summary_inspection_line_Trad_Repor_turn{turn}.xlsx')
+        book.save(f'{new_path}/Summary_inspection_line_Trad_Repor_Shift{turn}.xlsx')
         print("Cambios guardados exitosamente.") 
         
         
@@ -135,7 +135,7 @@ def file_day_summary(path: str, new_path: str, data: list, name_new_sheet: str, 
     
     
     day = name_new_sheet
-    new_name_sheet = f'{day}'
+    new_name_sheet = f'{day}_Shift_{month}'
     
     try:
         # Open the file
