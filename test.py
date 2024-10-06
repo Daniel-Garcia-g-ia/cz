@@ -64,7 +64,7 @@ file_turn_report_excel(URL_REPORT,path_turn_report_day, turn, day, data) """
 
 
 # summary day now
-""" path_summary_day_report, path_summary_report, day, month_text, path_created, file_exists = create_dir_day_now(URL_SUMMARY_DIRECTORY,NAME_FILE_REPORT)
+path_summary_day_report, path_summary_report, day, month_text, path_created, file_exists = create_dir_day_now(URL_SUMMARY_DIRECTORY,NAME_FILE_REPORT)
 
 
 try:
@@ -78,7 +78,7 @@ try:
             print('created file succefull')
             
 except NameError:
-      print('created does not existed') """
+      print('created does not existed')
 
 
 

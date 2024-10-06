@@ -1,5 +1,6 @@
 import openpyxl
 from datetime import datetime
+from openpyxl.styles import PatternFill
 
 def file_turn_report_excel(path:str, new_path:str, turn:str, day:str, data: str ):
     '''
@@ -70,10 +71,21 @@ def file_turn_report_excel(path:str, new_path:str, turn:str, day:str, data: str 
                     new_cell.number_format = cell.number_format
                     
         
+        yellow_fill = PatternFill(start_color='FFFF00', end_color='FFFF00', fill_type='solid')
+        red_fill = PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
+        
         # Write data into the new sheet
         for i, fila in enumerate(data):
             for j, valor in enumerate(fila):
-                new_sheet.cell(row=i+14, column=j+1, value=valor)     
+                new_sheet.cell(row=i+14, column=j+1, value=valor)
+                
+            if fila[15]>0 and fila[15]!=2:
+                for j in range(1, len(fila) + 1):  
+                    new_sheet.cell(row=i+14, column=j).fill = yellow_fill
+                    
+            if fila[15]==2:
+                for j in range(1, len(fila) + 1):  
+                    new_sheet.cell(row=i+14, column=j).fill = red_fill 
                 
         new_sheet.merge_cells('AJ11:AQ11')
         new_sheet.merge_cells('AR11:AY11')
@@ -93,6 +105,8 @@ def file_turn_report_excel(path:str, new_path:str, turn:str, day:str, data: str 
         print("El archivo no fue encontrado en la ruta especificada.")
     except Exception as e:
         print(f"Ocurrió un error: {e}")       
+
+
 
 def file_day_summary(path: str, new_path: str, data: list, name_new_sheet: str, month: str):
     '''
@@ -133,9 +147,8 @@ def file_day_summary(path: str, new_path: str, data: list, name_new_sheet: str, 
     
     '''   
     
-    
     day = name_new_sheet
-    new_name_sheet = f'{day}_Shift_{month}'
+    new_name_sheet = f'{day}'
     
     try:
         # Open the file
@@ -145,7 +158,11 @@ def file_day_summary(path: str, new_path: str, data: list, name_new_sheet: str, 
         # Find the format page
         sheet = book['Format']
         
-        # Create a new sheet
+        # Validate existing sheet
+        if new_name_sheet in book.sheetnames:        
+            del book[new_name_sheet]
+        
+        # Create a new sheet       
         new_sheet = book.create_sheet(title=new_name_sheet)
         
         # Copy the content and formats from the original sheet to the new sheet
@@ -159,12 +176,26 @@ def file_day_summary(path: str, new_path: str, data: list, name_new_sheet: str, 
                     new_cell.border = cell.border.copy()
                     new_cell.fill = cell.fill.copy()
                     new_cell.number_format = cell.number_format
-                   
+        
+        # Check if the length of the data at position 13 is equal to 33
+        
+        
+        yellow_fill = PatternFill(start_color='FFFF00', end_color='FFFF00', fill_type='solid')
+        red_fill = PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
         
         # Write data into the new sheet
         for i, fila in enumerate(data):
             for j, valor in enumerate(fila):
-                new_sheet.cell(row=i+14, column=j+1, value=valor)     
+                new_sheet.cell(row=i+14, column=j+1, value=valor)
+                
+            if fila[15]>0 and fila[15]!=2:
+                for j in range(1, len(fila) + 1):  
+                    new_sheet.cell(row=i+14, column=j).fill = yellow_fill
+                    
+            if fila[15]==2:
+                for j in range(1, len(fila) + 1):  
+                    new_sheet.cell(row=i+14, column=j).fill = red_fill 
+                    
                 
         new_sheet.merge_cells('AJ11:AQ11')
         new_sheet.merge_cells('AR11:AY11')
@@ -183,3 +214,4 @@ def file_day_summary(path: str, new_path: str, data: list, name_new_sheet: str, 
         print("El archivo no fue encontrado en la ruta especificada.")
     except Exception as e:
         print(f"Ocurrió un error: {e}")
+
