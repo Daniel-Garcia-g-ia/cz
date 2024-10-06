@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv  
-from src.sql.sql_query import fetch_records_by_date  
-from scripts.get_date import get_current_yesterday as date
+from sql_query import fetch_records_by_date  
+from scripts.get_date import get_current_day as date
 from scripts.file import *
 from scripts.create_dir import *
 
@@ -33,8 +33,9 @@ def main():
     try:
         # call the función fetch_records_by_date
         records = fetch_records_by_date(DB_SERVER, DB_NAME, DB_USER, DB_PASSWORD, table_name, start_date, end_date,'Created')
+
        
-        path_summary_day_report, path_summary_report, day, month_text, path_created, file_exists = create_dir_yesterday(URL_SUMMARY_DIRECTORY,NAME_FILE_REPORT)       
+        path_summary_day_report, path_summary_report, day, month_text, path_created, file_exists = create_dir_day_now(URL_SUMMARY_DIRECTORY,NAME_FILE_REPORT)     
         
         if file_exists:
             name_file= f'{NAME_FILE_REPORT}_{month_text}.xlsx'
