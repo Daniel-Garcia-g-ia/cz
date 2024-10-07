@@ -40,10 +40,10 @@ def main():
         if file_exists:
             name_file= f'{NAME_FILE_REPORT}_{month_text}.xlsx'
             path_update_file= f'{path_summary_report}/{name_file}'            
-            file_day_summary(path_update_file, path_summary_report, records, day, month_text)
+            file_day_summary(path_update_file, path_summary_report, records, day, month_text, file_exists)
             print('update file succefull')
         else:
-            file_day_summary(URL_REPORT, path_summary_report, records, day, month_text)
+            file_day_summary(URL_REPORT, path_summary_report, records, day, month_text, file_exists)
             print('created file succefull')
        
 

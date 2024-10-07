@@ -108,7 +108,7 @@ def file_turn_report_excel(path:str, new_path:str, turn:str, day:str, data: str 
 
 
 
-def file_day_summary(path: str, new_path: str, data: list, name_new_sheet: str, month: str):
+def file_day_summary(path: str, new_path: str, data: list, name_new_sheet: str, month: str, file_exist:bool):
     '''
     This function opens an Excel file, creates a new sheet based on an existing "Format" sheet, copies its content and style, 
     writes data from a list into the new sheet, and saves the workbook to a new path with a specified name.
@@ -157,7 +157,7 @@ def file_day_summary(path: str, new_path: str, data: list, name_new_sheet: str, 
         
         # Find the format page
         sheet = book['Format']
-        
+        sheet_NG_summary = book ['NG Summary']       
         # Validate existing sheet
         if new_name_sheet in book.sheetnames:        
             del book[new_name_sheet]
@@ -195,7 +195,10 @@ def file_day_summary(path: str, new_path: str, data: list, name_new_sheet: str, 
             if fila[15]==2:
                 for j in range(1, len(fila) + 1):  
                     new_sheet.cell(row=i+14, column=j).fill = red_fill 
-                    
+
+        if not file_exist:
+            sheet_NG_summary.cell('C3', value=f'01-{month}')
+
                 
         new_sheet.merge_cells('AJ11:AQ11')
         new_sheet.merge_cells('AR11:AY11')
